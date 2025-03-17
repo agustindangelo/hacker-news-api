@@ -1,0 +1,51 @@
+# .NET Build Artifacts
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.log
+*.cache
+*.vspscc
+*.vsp
+*.vssscc
+*.csproj.user
+*.user
+
+# Configuration & Secrets
+appsettings.json
+appsettings.*.json
+secrets.json
+.env
+*.config
+
+# macOS & Linux
+.DS_Store
+*.swp
+
+# Visual Studio & Rider
+.vscode/
+.idea/
+*.suo
+*.user
+*.vcxproj.user
+
+# NuGet Packages
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+global.json
+
+# Logs & Coverage
+logs/
+coverage/
+*.coverage
+*.testresults
+TestResults/
+
+# Other
+*.bak
+*.tmp
+Thumbs.db
