@@ -62,7 +62,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'hacker-news'
+          app-name: 'hackernews'
           slot-name: 'Production'
           package: .
           
