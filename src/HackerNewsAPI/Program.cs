@@ -3,7 +3,7 @@ using HackerNewsAPI.Managers.Contracts;
 using HackerNewsAPI.Managers.Implementations;
 using HackerNewsAPI.Repositories.Contracts;
 using HackerNewsAPI.Repositories.Implementations;
-using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,8 +32,10 @@ builder.Services.AddCors(options =>
         });
 });
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddScoped<IDbConnection>(_ => new SqlConnection(connectionString));
+// Configure SQLite in-memory database
+var connection = new SqliteConnection("Data Source=:memory:");
+connection.Open(); // Keep the connection open for the lifetime of the app
+builder.Services.AddSingleton<IDbConnection>(connection);
 
 // Register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -45,7 +47,10 @@ builder.Services.AddScoped<IItemManager, ItemManager>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+// Seed the database at startup
+SeedDatabase(connection);
+
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options =>
@@ -58,3 +63,13 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 app.UseCors("AllowWebClient");
 app.MapControllers();
 app.Run();
+
+void SeedDatabase(SqliteConnection connection)
+{
+    var sqlFilePath = Path.Combine(AppContext.BaseDirectory, "Data", "SeedData.sql");
+    var sqlCommands = File.ReadAllText(sqlFilePath);
+
+    using var command = connection.CreateCommand();
+    command.CommandText = sqlCommands;
+    command.ExecuteNonQuery();
+}
