@@ -17,14 +17,14 @@ public class TopStoriesController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetTopStories()
+    public async Task<IActionResult> GetLatestStories()
     {
         try
         {
             var cacheKey = "TopStories";
             if (!_cache.TryGetValue(cacheKey, out IEnumerable<int>? storiesIds))
             {
-                storiesIds = await _itemManager.GetNewestStories();
+                storiesIds = await _itemManager.GetLatestStories();
                 if (storiesIds != null)
                 {
                     var cacheEntryOptions = new MemoryCacheEntryOptions()

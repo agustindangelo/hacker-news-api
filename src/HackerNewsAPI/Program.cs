@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
 
 // Configure SQLite in-memory database
 var connection = new SqliteConnection("Data Source=:memory:");
-connection.Open(); // Keep the connection open for the lifetime of the app
+connection.Open();
 builder.Services.AddSingleton<IDbConnection>(connection);
 
 // Register repositories
@@ -53,11 +53,7 @@ SeedDatabase(connection);
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Hacker News API V1");
-        options.RoutePrefix = "swagger";
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseCors("AllowWebClient");

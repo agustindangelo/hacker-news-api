@@ -5,7 +5,7 @@ The **Hacker News API** provides access to items, top stories, and user informat
 ## Endpoints
 
 ### **1. Get Item by ID**
-**Endpoint:** `GET /api/Item/{id}`
+**Endpoint:** `GET /api/items/{id}`
 
 Retrieves details of a specific item by its ID.
 
@@ -20,12 +20,12 @@ Retrieves details of a specific item by its ID.
 
 **Example Request:**
 ```sh
-GET /api/Item/123
+GET /api/items/123
 ```
 
 ---
 ### **2. Search Items by Title**
-**Endpoint:** `GET /api/Item/search`
+**Endpoint:** `GET /api/items/search`
 
 Searches for items based on their title.
 
@@ -39,11 +39,11 @@ Searches for items based on their title.
 
 **Example Request:**
 ```sh
-GET /api/Item/search?title=Angular
+GET /api/items/search?title=Angular
 ```
 
 ---
-### **3. Get Top Stories**
+### **3. Get Latest Stories**
 **Endpoint:** `GET /api/topstories`
 
 Retrieves the latest top stories from Hacker News.
@@ -58,7 +58,7 @@ GET /api/topstories
 
 ---
 ### **4. Get User by Username**
-**Endpoint:** `GET /api/User/{username}`
+**Endpoint:** `GET /api/users/{username}`
 
 Fetches details about a specific user.
 
@@ -73,7 +73,7 @@ Fetches details about a specific user.
 
 **Example Request:**
 ```sh
-GET /api/User/alice
+GET /api/users/alice
 ```
 
 ---

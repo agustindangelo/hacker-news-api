@@ -91,7 +91,7 @@ public class ItemRepository : IItemRepository
         }
     }
 
-    public async Task<IEnumerable<int>> GetNewestStories()
+    public async Task<IEnumerable<int>> GetLatestStories()
     {
         try
         {

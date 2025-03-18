@@ -18,11 +18,11 @@ public class ItemManager : IItemManager
         _logger = logger;
     }
 
-    public async Task<IEnumerable<int>> GetNewestStories()
+    public async Task<IEnumerable<int>> GetLatestStories()
     {
         try
         {
-            return await _itemRepository.GetNewestStories();
+            return await _itemRepository.GetLatestStories();
         }
         catch (Exception ex)
         {

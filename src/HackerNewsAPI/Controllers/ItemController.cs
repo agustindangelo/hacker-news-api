@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace HackerNewsAPI.Controllers;
-[Route("api/[controller]")]
+[Route("api/items")]
 [ApiController]
 public class ItemController : BaseController
 {
