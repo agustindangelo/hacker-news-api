@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowWebClient",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200")
+            policy.WithOrigins("http://localhost:4200", "https://lively-grass-0bf2ced0f.6.azurestaticapps.net")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
