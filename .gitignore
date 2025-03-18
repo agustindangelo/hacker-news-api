@@ -12,6 +12,8 @@ out/
 *.vssscc
 *.csproj.user
 *.user
+publish/
+publish.zip
 
 # Configuration & Secrets
 appsettings.json

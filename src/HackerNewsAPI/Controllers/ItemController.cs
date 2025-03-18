@@ -46,6 +46,10 @@ public class ItemController : BaseController
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(title) || title.Length > 50)
+            {
+                throw new ArgumentException("Invalid user input.");
+            }
             var cacheKey = $"SearchStories_{title}";
             if (!_cache.TryGetValue(cacheKey, out IEnumerable<ItemDTO>? stories))
             {
