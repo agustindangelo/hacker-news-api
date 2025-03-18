@@ -31,14 +31,14 @@ public class TopStoriesControllerTests
     }
 
     [Test]
-    public async Task GetTopStories_CallsItemManager_And_CachesResult_WhenStoriesNotInCache()
+    public async Task GetLatestStories_CallsItemManager_And_CachesResult_WhenStoriesNotInCache()
     {
         // Arrange
         var expectedStories = new List<int> { 1, 2, 3 };
-        _mockItemManager.Setup(m => m.GetNewestStories()).ReturnsAsync(expectedStories);
+        _mockItemManager.Setup(m => m.GetLatestStories()).ReturnsAsync(expectedStories);
 
         // Act
-        var result = await _controller.GetTopStories();
+        var result = await _controller.GetLatestStories();
 
         // Assert
         var okResult = result as OkObjectResult;
@@ -51,19 +51,19 @@ public class TopStoriesControllerTests
         Assert.That(_cache.TryGetValue($"TopStories", out List<int>? cachedIds), Is.True);
         Assert.That(cachedIds, Is.EqualTo(expectedStories));
 
-        _mockItemManager.Verify(m => m.GetNewestStories(), Times.Once);
+        _mockItemManager.Verify(m => m.GetLatestStories(), Times.Once);
     }
 
     [Test]
-    public async Task GetTopStories_ReturnsCachedIds_WhenStoriesIdsExistsInCache()
+    public async Task GetLatestStories_ReturnsCachedIds_WhenStoriesIdsExistsInCache()
     {
         // Arrange
         var expectedStories = new List<int> { 1, 2, 3 };
-        _mockItemManager.Setup(m => m.GetNewestStories()).ReturnsAsync(expectedStories);
+        _mockItemManager.Setup(m => m.GetLatestStories()).ReturnsAsync(expectedStories);
         _cache.Set($"TopStories", expectedStories);
 
         // Act
-        var result = await _controller.GetTopStories();
+        var result = await _controller.GetLatestStories();
 
         // Assert
         var okResult = result as OkObjectResult;
@@ -71,6 +71,6 @@ public class TopStoriesControllerTests
         var returnedStories = okResult.Value as List<int>;
         Assert.That(returnedStories, Is.EqualTo(expectedStories));
 
-        _mockItemManager.Verify(m => m.GetNewestStories(), Times.Never);
+        _mockItemManager.Verify(m => m.GetLatestStories(), Times.Never);
     }
 }

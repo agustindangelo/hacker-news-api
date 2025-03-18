@@ -26,27 +26,27 @@ public class ItemManagerTests
     }
 
     [Test]
-    public async Task GetNewestStories_ReturnsStories_WhenStoriesExist()
+    public async Task GetLatestStories_ReturnsStories_WhenStoriesExist()
     {
         // Arrange
         var expectedStories = new List<int> { 1, 2, 3 };
-        _mockItemRepository.Setup(r => r.GetNewestStories()).ReturnsAsync(expectedStories);
+        _mockItemRepository.Setup(r => r.GetLatestStories()).ReturnsAsync(expectedStories);
 
         // Act
-        var result = await _itemManager.GetNewestStories();
+        var result = await _itemManager.GetLatestStories();
 
         // Assert
         Assert.That(result, Is.EqualTo(expectedStories));
     }
 
     [Test]
-    public void GetNewestStories_ThrowsException_WhenRepositoryThrowsException()
+    public void GetLatestStories_ThrowsException_WhenRepositoryThrowsException()
     {
         // Arrange
-        _mockItemRepository.Setup(r => r.GetNewestStories()).ThrowsAsync(new Exception("Repository error"));
+        _mockItemRepository.Setup(r => r.GetLatestStories()).ThrowsAsync(new Exception("Repository error"));
 
         // Act and Assert
-        Assert.ThrowsAsync<Exception>(_itemManager.GetNewestStories);
+        Assert.ThrowsAsync<Exception>(_itemManager.GetLatestStories);
     }
 
     [Test]
