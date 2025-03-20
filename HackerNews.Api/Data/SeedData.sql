@@ -12,7 +12,7 @@ CREATE TABLE Users (
 
 -- Create Items table
 CREATE TABLE Items (
-    Id INTEGER PRIMARY KEY,  -- Unique ID for each item
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Unique ID for each item
     Deleted INTEGER NULL,  -- 0 or 1 for boolean values
     Type TEXT NOT NULL CHECK (Type IN ('job', 'story', 'comment', 'poll', 'pollopt')),  -- Enum-like constraint
     ByUsername TEXT NULL,  -- Author's username
@@ -29,13 +29,14 @@ CREATE TABLE Items (
     FOREIGN KEY (Poll) REFERENCES Items(Id)
 );
 
--- Insert Users with random CreatedAt
+-- Insert Users
 INSERT INTO Users (Username, Karma, About, CreatedAt) VALUES
-('alice', 150, 'Tech enthusiast.', datetime('now', '-5 years', '+' || abs(random() % 1825) || ' days')),
-('bob', 200, 'Software engineer.', datetime('now', '-5 years', '+' || abs(random() % 1825) || ' days')),
-('charlie', 300, 'Open-source contributor.', datetime('now', '-5 years', '+' || abs(random() % 1825) || ' days')),
-('dave', 250, 'AI researcher.', datetime('now', '-5 years', '+' || abs(random() % 1825) || ' days')),
-('eve', 180, 'Cybersecurity expert.', datetime('now', '-5 years', '+' || abs(random() % 1825) || ' days'));
+('alice', 150, 'Tech enthusiast.', '2018-06-15 08:23:45'),
+('bob', 200, 'Software engineer.', '2019-11-27 16:45:30'),
+('charlie', 300, 'Open-source contributor.', '2020-04-10 12:10:05'),
+('dave', 250, 'AI researcher.', '2017-09-03 19:30:20'),
+('eve', 180, 'Cybersecurity expert.', '2021-02-18 05:55:12');
+
 
 -- Insert Stories
 INSERT INTO Items (Id, Type, ByUsername, Title, Url, Score, CreatedAt) VALUES

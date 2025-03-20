@@ -62,10 +62,20 @@ app.Run();
 
 void SeedDatabase(SqliteConnection connection)
 {
-    var sqlFilePath = Path.Combine(AppContext.BaseDirectory, "Data", "SeedData.sql");
-    var sqlCommands = File.ReadAllText(sqlFilePath);
+    try 
+    {
+        var sqlFilePath = Path.Combine(AppContext.BaseDirectory, "Data", "SeedData.sql");
+        Console.WriteLine($"Using SeedData file: {sqlFilePath}");
+        var sqlCommands = File.ReadAllText(sqlFilePath);
 
-    using var command = connection.CreateCommand();
-    command.CommandText = sqlCommands;
-    command.ExecuteNonQuery();
+        using var command = connection.CreateCommand();
+        command.CommandText = sqlCommands;
+        command.ExecuteNonQuery();
+
+        Console.WriteLine("Database seeded successfully.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error seeding database: {ex.Message}");
+    }
 }

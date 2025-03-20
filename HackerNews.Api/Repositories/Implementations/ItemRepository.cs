@@ -20,7 +20,7 @@ public class ItemRepository : IItemRepository
         try
         {
             var sql = @"
-            SELECT Id, Type, ByUsername, Title, Url, Score, Text, Parent
+            SELECT Id, Type, ByUsername, Title, Url, Score, Text, Parent, CreatedAt
             FROM Items 
             WHERE Id = @Id
             AND Deleted IS NULL AND Dead IS NULL";
@@ -38,7 +38,7 @@ public class ItemRepository : IItemRepository
         try
         {
             var sql = @"
-            SELECT Id, Type, ByUsername, Title, Url, Score
+            SELECT Id, Type, ByUsername, Title, Url, Score, CreatedAt
             FROM Items 
             WHERE Type = 'story' 
             AND Title LIKE @SearchValue 
@@ -58,7 +58,7 @@ public class ItemRepository : IItemRepository
         try
         {
             var sql = @"
-            SELECT Id, Type, ByUsername, Text
+            SELECT Id, Type, ByUsername, Text, CreatedAt
             FROM Items 
             WHERE Parent = @ParentId 
             AND Deleted IS NULL AND Dead IS NULL
