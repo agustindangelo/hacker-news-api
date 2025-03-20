@@ -29,6 +29,7 @@ secrets.json
 # Visual Studio & Rider
 .vscode/
 .idea/
+.vs/
 *.suo
 *.user
 *.vcxproj.user
